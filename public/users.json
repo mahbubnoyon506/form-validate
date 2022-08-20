@@ -1,0 +1,29 @@
+ [
+    {
+      "name": "Michael Scott",
+      "profileImage": "https://i.ibb.co/fM78tk9/user2.jpg",
+      "bio": "Don't ever, for any reason, do anything to anyone for any reason ever, no matter what",
+      "summary": {
+        "stories": 39,
+        "followers": 1100
+      }
+    },
+    {
+      "name": "Pam Beesly",
+      "profileImage": "https://i.ibb.co/fM78tk9/user2.jpg",
+      "bio": "Don't ever, for any reason, do anything to anyone for any reason ever, no matter what",
+      "summary": {
+        "stories": 89,
+        "followers": 200
+      }
+    },
+    {
+      "name": "Michael Scott",
+      "profileImage": "https://i.ibb.co/fM78tk9/user2.jpg",
+      "bio": "Don't ever, for any reason, do anything to anyone for any reason ever, no matter what",
+      "summary": {
+        "stories": 39,
+        "followers": 1100
+      }
+    }
+  ]
