@@ -6,7 +6,6 @@ import Form from "./Components/Form";
 function App() {
   return (
     <div>
-      <h2>Reacr Project</h2>
       <Form></Form>
     </div>
   );
