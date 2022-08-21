@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { ErrorMessage, Formik, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 const Form = () => {
 
   const [formdata, setFormdata] = useState([])
 
-  const [clear, setClear] = useState('')
+  const [clear, setClear] = useState(null)
 
   const formik = useFormik({
     initialValues: {
@@ -59,13 +59,15 @@ const Form = () => {
       if (getdata) {
         storedata = JSON.parse(getdata);
         setFormdata(storedata)
-        setClear('')
+        setClear(values)
       }
     }
   })
 
   const { name, age, gender, mobile, govId, govid, guardianType, guardian, guardianEmail, emergencyNumber, address, state, city, country, pincode, occupation, relagion, maritialStatus, blood, nationality } = formdata;
-
+const handleClear = () => {
+  setClear('')
+}
 
   return (
     <div>
@@ -199,7 +201,7 @@ const Form = () => {
             </p>
           </div>
           <p className='text-lg font-medium mt-5 underline'>Other Details:</p>
-          <div className='lg:grid grid-cols-4 gap-5'>
+          <div className='lg:grid grid-cols-4 gap-2'>
             <p>Ocupation<input
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -237,10 +239,7 @@ const Form = () => {
             </p>
           </div>
           <div className='flex justify-end mx-20'>
-            <button 
-             onChange={formik.handleChange}
-             onBlur={formik.handleBlur}
-            type='reset'  className='btn btn-error mr-10'>CANCEL</button>
+            <button onClick={handleClear} className='btn btn-error mr-10'>CANCEL</button>
             <input className='ml-2 btn btn-success' type="submit" value="SUBMIT" />
           </div>
         </form>
