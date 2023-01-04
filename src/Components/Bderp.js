@@ -17,11 +17,12 @@ const Bderp = () => {
     const [phone, setPhone] = useState('');
     const [fax, setFax] = useState('');
 
-    useEffect( () => {
-        ( async () => {
+    useEffect(() => {
+        (async () => {
             await axios.get('data.json')
-            .then( res => {
-                setCountryData(res.data)})
+                .then(res => {
+                    setCountryData(res.data)
+                })
         }
 
         )()
@@ -29,9 +30,12 @@ const Bderp = () => {
     // const countryName = country.toLowerCase()
     const allData = { name, country, division, district, city, town, zip, village, house, phone, fax }
 
-    console.log(countryData)
-
-
+    // console.log(allData)
+    const serchOfCountry = countryData?.find((country) => country.country === 'bangladesh');
+    const serchDivision = serchOfCountry?.division?.find((division) => division.name === 'dhaka');
+    const searchDistrict = serchDivision?.district?.find((district) => district.name === 'dhaka');
+    const searchSubDistrict = searchDistrict?.subDistrict?.find((subdist) => subdist.name === 'uttara');
+    const searchTown = searchSubDistrict?.town?.find((town) => town.name === 'nodda');
 
     return (
         <div className='bg-[#F9F9F9] py-10 px-5'>
@@ -51,7 +55,12 @@ const Bderp = () => {
                                 onChange={e => { setCountry((e.target.value).toLowerCase()) }}
                                 className='w-full border-2 focus:outline-none' name="country" id="">
                                 <option value="Please search">Please search</option>
-                                <option value="Bangladesh">Bangladesh</option>
+                                {
+                                    countryData.length &&
+                                    countryData.map((country, index) =>
+                                        <option className='capitalize' key={index} value={country.country}>{country.country}</option>
+                                    )
+                                }
                             </select>
                         </div>
                         <div className='pb-2'>
@@ -60,7 +69,11 @@ const Bderp = () => {
                                 onChange={e => { setDivision((e.target.value).toLowerCase()) }}
                                 className='w-full border-2 focus:outline-none' name="state" id="">
                                 <option value="Please search">Please search</option>
-                                <option value="Bangladesh">Bangladesh</option>
+                                {
+                                    serchOfCountry?.division?.map((division, index) =>
+                                        <option className='capitalize' key={index} value={division.name}>{division.name}</option>
+                                    )
+                                }
                             </select>
                         </div>
                         <div className='pb-2'>
@@ -69,7 +82,11 @@ const Bderp = () => {
                                 onChange={e => { setDistrict((e.target.value).toLowerCase()) }}
                                 className='w-full border-2 focus:outline-none' name="district" id="">
                                 <option value="Please search">Please search</option>
-                                <option value="Bangladesh">Bangladesh</option>
+                                {
+                                    serchDivision?.district?.map((district, index) => 
+                                    <option key={index} value={district.name}>{district.name}</option>
+                                    )
+                                }
                             </select>
                         </div>
                         <div className='pb-2'>
@@ -78,7 +95,11 @@ const Bderp = () => {
                                 onChange={e => { setCity((e.target.value).toLowerCase()) }}
                                 className='w-full border-2 focus:outline-none' name="city" id="">
                                 <option value="Please search">Please search</option>
-                                <option value="Bangladesh">Bangladesh</option>
+                                {
+                                    searchDistrict?.subDistrict?.map((subdist, index) => 
+                                    <option key={index} value={subdist.name}>{subdist.name}</option>
+                                    )
+                                }
                             </select>
                         </div>
                         <div className='pb-2'>
@@ -87,7 +108,11 @@ const Bderp = () => {
                                 onChange={e => { setTown((e.target.value).toLowerCase()) }}
                                 className='w-full border-2 focus:outline-none' name="town" id="">
                                 <option value="Please search">Please search</option>
-                                <option value="Bangladesh">Bangladesh</option>
+                                {
+                                    searchSubDistrict?.town?.map((town, index) =>
+                                    <option key={index} value={town.name}>{town.name}</option>
+                                    )
+                                }
                             </select>
                         </div>
                         <div className='pb-2'>
@@ -102,7 +127,11 @@ const Bderp = () => {
                                 onChange={e => { setVillage((e.target.value).toLowerCase()) }}
                                 className='w-full border-2 focus:outline-none' name="street" id="">
                                 <option value="Please search">Please search</option>
-                                <option value="Bangladesh">Bangladesh</option>
+                                {
+                                    searchTown?.village?.map((village, index) => 
+                                    <option key={index} value={village.name}>{village.name}</option>
+                                    )
+                                }
                             </select>
                         </div>
                         <div className='pb-2'>
