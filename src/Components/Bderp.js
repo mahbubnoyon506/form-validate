@@ -1,6 +1,38 @@
+import axios from 'axios';
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const Bderp = () => {
+    const [countryData, setCountryData] = useState([])
+    const [name, setName] = useState('');
+    const [country, setCountry] = useState('');
+    const [division, setDivision] = useState('');
+    const [district, setDistrict] = useState('');
+    const [city, setCity] = useState('');
+    const [town, setTown] = useState('');
+    const [zip, setZip] = useState('');
+    const [village, setVillage] = useState('');
+    const [house, setHouse] = useState('');
+    const [phone, setPhone] = useState('');
+    const [fax, setFax] = useState('');
+
+    useEffect( () => {
+        ( async () => {
+            await axios.get('data.json')
+            .then( res => {
+                setCountryData(res.data)})
+        }
+
+        )()
+    }, [])
+    // const countryName = country.toLowerCase()
+    const allData = { name, country, division, district, city, town, zip, village, house, phone, fax }
+
+    console.log(countryData)
+
+
+
     return (
         <div className='bg-[#F9F9F9] py-10 px-5'>
             <div className='grid grid-cols-2 gap-5'>
@@ -9,68 +41,87 @@ const Bderp = () => {
                     <form>
                         <div className='pb-2'>
                             <label className='block text-[#000]' htmlFor="">Attention</label>
-                            <input className='bg-[#fff] border-2 focus:outline-none pl-2 w-full' type="text" name="" id="" />
+                            <input
+                                onBlur={e => { setName(e.target.value) }}
+                                className='bg-[#fff] border-2 focus:outline-none pl-2 w-full' type="text" name="customername" id="name" />
                         </div>
                         <div className='pb-2'>
                             <label className='block text-[#000]' htmlFor="">Country</label>
-                            <select className='w-full border-2 focus:outline-none' name="" id="">
+                            <select
+                                onChange={e => { setCountry((e.target.value).toLowerCase()) }}
+                                className='w-full border-2 focus:outline-none' name="country" id="">
                                 <option value="Please search">Please search</option>
                                 <option value="Bangladesh">Bangladesh</option>
                             </select>
                         </div>
                         <div className='pb-2'>
                             <label className='block text-[#000]' htmlFor="">Division/State</label>
-                            <select className='w-full border-2 focus:outline-none' name="" id="">
+                            <select
+                                onChange={e => { setDivision((e.target.value).toLowerCase()) }}
+                                className='w-full border-2 focus:outline-none' name="state" id="">
                                 <option value="Please search">Please search</option>
                                 <option value="Bangladesh">Bangladesh</option>
                             </select>
                         </div>
                         <div className='pb-2'>
                             <label className='block text-[#000]' htmlFor="">District</label>
-                            <select className='w-full border-2 focus:outline-none' name="" id="">
+                            <select
+                                onChange={e => { setDistrict((e.target.value).toLowerCase()) }}
+                                className='w-full border-2 focus:outline-none' name="district" id="">
                                 <option value="Please search">Please search</option>
                                 <option value="Bangladesh">Bangladesh</option>
                             </select>
                         </div>
                         <div className='pb-2'>
                             <label className='block text-[#000]' htmlFor="">City/Sub-district/Thana</label>
-                            <select className='w-full border-2 focus:outline-none' name="" id="">
+                            <select
+                                onChange={e => { setCity((e.target.value).toLowerCase()) }}
+                                className='w-full border-2 focus:outline-none' name="city" id="">
                                 <option value="Please search">Please search</option>
                                 <option value="Bangladesh">Bangladesh</option>
                             </select>
                         </div>
                         <div className='pb-2'>
                             <label className='block text-[#000]' htmlFor="">Union/Area/Town</label>
-                            <select className='w-full border-2 focus:outline-none' name="" id="">
+                            <select
+                                onChange={e => { setTown((e.target.value).toLowerCase()) }}
+                                className='w-full border-2 focus:outline-none' name="town" id="">
                                 <option value="Please search">Please search</option>
                                 <option value="Bangladesh">Bangladesh</option>
                             </select>
                         </div>
                         <div className='pb-2'>
                             <label className='block text-[#000]' htmlFor="">Zip Code</label>
-                            <select className='w-full border-2 focus:outline-none' name="" id="">
-                                <option value="Please search">Please search</option>
-                                <option value="Bangladesh">Bangladesh</option>
-                            </select>
+                            <input
+                                onBlur={e => { setZip(e.target.value) }}
+                                className='bg-[#fff] border-2 focus:outline-none pl-2 w-full' type="text" name="zip" id="zip" />
                         </div>
                         <div className='pb-2'>
                             <label className='block text-[#000]' htmlFor="">Street Address/Village</label>
-                            <select className='w-full border-2 focus:outline-none' name="" id="">
+                            <select
+                                onChange={e => { setVillage((e.target.value).toLowerCase()) }}
+                                className='w-full border-2 focus:outline-none' name="street" id="">
                                 <option value="Please search">Please search</option>
                                 <option value="Bangladesh">Bangladesh</option>
                             </select>
                         </div>
                         <div className='pb-2'>
                             <label className='block text-[#000]' htmlFor="">House Suite/Apartment</label>
-                            <input className='bg-[#fff] border-2 focus:outline-none pl-2 w-full' type="text" name="" id="" placeholder='house number:'/>
+                            <input
+                                onBlur={e => { setHouse(e.target.value) }}
+                                className='bg-[#fff] border-2 focus:outline-none pl-2 w-full' type="text" name="house" id="house" placeholder='house number:' />
                         </div>
                         <div className='pb-2'>
                             <label className='block text-[#000]' htmlFor="">Phone</label>
-                            <input className='bg-[#fff] border-2 focus:outline-none pl-2 w-full' type="text" name="" id="" placeholder='Phone number'/>
+                            <input
+                                onBlur={e => { setPhone(e.target.value) }}
+                                className='bg-[#fff] border-2 focus:outline-none pl-2 w-full' type="text" name="phone" id="phone" placeholder='Phone number' />
                         </div>
                         <div className='pb-2'>
                             <label className='block text-[#000]' htmlFor="">Fax</label>
-                            <input className='bg-[#fff] border-2 focus:outline-none pl-2 w-full' type="text" name="" id="" placeholder='Fax'/>
+                            <input
+                                onChange={e => { setFax(e.target.value) }}
+                                className='bg-[#fff] border-2 focus:outline-none pl-2 w-full' type="text" name="fax" id="fax" placeholder='Fax' />
                         </div>
                     </form>
                 </div>
