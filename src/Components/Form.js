@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
+import FormValues from './FormValues';
 const Form = () => {
-
-  const [formdata, setFormdata] = useState([])
-
-  const [clear, setClear] = useState(null)
 
   const formik = useFormik({
     initialValues: {
@@ -53,21 +51,14 @@ const Form = () => {
       guardianEmail: Yup.string().email('Invalid email').required('Required')
     }),
     onSubmit: (values) => {
-      let storedata = {};
-      localStorage.setItem('alldata', JSON.stringify(values));
-      const getdata = localStorage.getItem('alldata');
-      if (getdata) {
-        storedata = JSON.parse(getdata);
-        setFormdata(storedata)
-        setClear(values)
-      }
+      axios.post('http://localhost:5000/uservalues', values)
+      .then(function (response) { console.log(response) })
+      window.location.reload(false)
     }
   })
-
-  const { name, age, gender, mobile, govId, govid, guardianType, guardian, guardianEmail, emergencyNumber, address, state, city, country, pincode, occupation, relagion, maritialStatus, blood, nationality } = formdata;
-const handleClear = () => {
-  setClear('')
-}
+  const handleCancel = () => {
+    window.location.reload(false)
+  }
 
   return (
     <div>
@@ -239,61 +230,13 @@ const handleClear = () => {
             </p>
           </div>
           <div className='flex justify-end mx-20'>
-            <button onClick={handleClear} className='btn btn-error mr-10'>CANCEL</button>
+            <button onClick={handleCancel} className='btn btn-error mr-10'>CANCEL</button>
             <input className='ml-2 btn btn-success' type="submit" value="SUBMIT" />
           </div>
         </form>
       </div>
       <div className='m-10'>
-        <div class="overflow-x-auto">
-          <table class="table w-full">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Gender</th>
-                <th>Contact</th>
-                <th>Gov Issued ID</th>
-                <th>Guardin</th>
-                <th>Guardin Email</th>
-                <th>Emergency Number</th>
-                <th>Address</th>
-                <th>State</th>
-                <th>City</th>
-                <th>Country</th>
-                <th>Pincode</th>
-                <th>Occupation</th>
-                <th>Relagion</th>
-                <th>Maritial Status</th>
-                <th>Blood</th>
-                <th>Nationality</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="hover">
-                <td>{name}</td>
-                <td>{age}</td>
-                <td>{gender}</td>
-                <td>{mobile}</td>
-                <td>{govId}, {govid}</td>
-                <td>{guardianType}, {guardian}</td>
-                <td>{guardianEmail}</td>
-                <td>{emergencyNumber}</td>
-                <td>{address}</td>
-                <td>{state}</td>
-                <td>{city}</td>
-                <td>{country}</td>
-                <td>{pincode}</td>
-                <td>{occupation}</td>
-                <td>{relagion}</td>
-                <td>{maritialStatus}</td>
-                <td>{blood}</td>
-                <td>{nationality}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <FormValues></FormValues>
       </div>
     </div>
   );
