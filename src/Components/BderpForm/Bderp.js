@@ -34,7 +34,7 @@ const Bderp = () => {
     const searchSubDistrict = searchDistrict?.subDistrict?.find((subItem) => subItem.name === city);
     const searchTown = searchSubDistrict?.town?.find((townItem) => townItem.name === town);
 
-    const zip = searchTown?.zip
+    const zip = searchTown?.zip;
     const handleShippingAddress = () => {
         const allData = { name, country, division, district, city, town, zip, village, house, phone, fax };
         setShippingAddress(allData)
