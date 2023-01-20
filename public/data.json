@@ -1187,7 +1187,7 @@
             },
             {
                 "id" : 3,
-                "name" : "Sylet",
+                "name" : "sylet",
                 "district" : [
                     {
                         "id" : 1,
@@ -1780,7 +1780,7 @@
     },
     {
         "id" : 2,
-        "country" : "India",
+        "country" : "india",
         "division" : [
             {
                 "id" : 1,
@@ -3559,7 +3559,7 @@
     },
     {
         "id" : 3,
-        "country" : "Pakistan",
+        "country" : "pakistan",
         "division" : [
             {
                 "id" : 1,

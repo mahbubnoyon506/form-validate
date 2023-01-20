@@ -28,11 +28,11 @@ const Bderp = () => {
         )()
     }, [])
 
-    const serchOfCountry = countryData?.find((countItem) => countItem.country === country);
-    const serchDivision = serchOfCountry?.division?.find((divItem) => divItem.name === division);
-    const searchDistrict = serchDivision?.district?.find((disItem) => disItem.name === district);
-    const searchSubDistrict = searchDistrict?.subDistrict?.find((subItem) => subItem.name === city);
-    const searchTown = searchSubDistrict?.town?.find((townItem) => townItem.name === town);
+    const serchOfCountry = countryData?.find((countItem) => countItem.country.toLowerCase() === country.toLowerCase());
+    const serchDivision = serchOfCountry?.division?.find((divItem) => divItem.name.toLowerCase() === division.toLowerCase());
+    const searchDistrict = serchDivision?.district?.find((disItem) => disItem.name.toLowerCase() === district.toLowerCase());
+    const searchSubDistrict = searchDistrict?.subDistrict?.find((subItem) => subItem.name.toLowerCase() === city.toLowerCase());
+    const searchTown = searchSubDistrict?.town?.find((townItem) => townItem.name.toLowerCase() === town.toLowerCase());
 
     const zip = searchTown?.zip;
     const handleShippingAddress = () => {
@@ -40,7 +40,7 @@ const Bderp = () => {
         setShippingAddress(allData)
     }
 
-    // console.log(zip)
+    console.log({ serchOfCountry})
 
     return (
         <div className='bg-[#F9F9F9] py-10 px-5 lg:px-20'>
@@ -110,7 +110,7 @@ const Bderp = () => {
                         <div className='pb-2'>
                             <label className='block text-[#000]' htmlFor="">Union/Area/Town</label>
                             <select
-                                onChange={e => { setTown((e.target.value).toLowerCase()) }}
+                                onChange={e => { setTown((e.target.value).toLowerCase())}}
                                 className='w-full border-2 focus:outline-none py-1' name="town" id="">
                                 <option value="Please search">Please search</option>
                                 {
@@ -176,7 +176,7 @@ const Bderp = () => {
                             <label className='block text-[#000]' htmlFor="">Country</label>
                             <select
                                 className='w-full border-2 focus:outline-none py-1' name="country" id="">
-                                <option value={shippingAddress?.country} selected>{shippingAddress?.country}</option>
+                                <option className='capitalize' value={shippingAddress?.country} selected>{shippingAddress?.country}</option>
                             </select>
                         </div>
                         <div className='pb-2'>
